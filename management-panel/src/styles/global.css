@@ -209,6 +209,11 @@ html[dir="rtl"] .main-content {
   box-shadow: var(--shadow);
 }
 
+/* bottom-nav */
+.bottom-nav {
+  display: none;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .sidebar {
@@ -242,6 +247,57 @@ html[dir="rtl"] .main-content {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--color-text);
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--color-card);
+    border-top: 1px solid var(--color-border);
+    padding: 0.75rem 0;
+    z-index: 30;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-text);
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s;
+    padding: 0.5rem;
+    border-radius: 8px;
+    width: 80px;
+  }
+
+  .bottom-nav-item:hover,
+  .bottom-nav-item.active {
+    opacity: 1;
+    color: var(--color-primary);
+    background: rgba(59, 130, 246, 0.08);
+  }
+
+  .bottom-nav-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .bottom-nav-label {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  /* محتوای اصلی رو از پایین فاصله بده تا زیر منو نره */
+  .page-content {
+    padding-bottom: 6rem; /* ارتفاع منو + فاصله */
   }
 }
 

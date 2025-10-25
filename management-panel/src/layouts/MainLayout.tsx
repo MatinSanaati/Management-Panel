@@ -3,10 +3,10 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import { closeSidebar } from "../store/features/uiSlice";
+import BottomNavMenu from "../components/BottomNavMenu";
 
 export default function MainLayout() {
   const { sidebarOpen } = useAppSelector((state) => state.ui);
-
   const dispatch = useAppDispatch();
 
   const handleMainClick = () => {
@@ -14,6 +14,8 @@ export default function MainLayout() {
       dispatch(closeSidebar());
     }
   };
+
+  const isMobile = window.innerWidth <= 768;
 
   return (
     <div className="main-layout">
@@ -24,6 +26,7 @@ export default function MainLayout() {
           <Outlet />
         </main>
       </div>
+      {isMobile && <BottomNavMenu />}
     </div>
   );
 }
