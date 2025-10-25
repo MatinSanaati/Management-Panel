@@ -1,0 +1,250 @@
+/* src/global.css */
+:root {
+  --color-bg: #f9fafb;
+  --color-text: #111827;
+  --color-card: #ffffff;
+  --color-border: #e5e7eb;
+  --color-sidebar: #f3f4f6;
+  --color-primary: #3b82f6;
+  --color-hover: #e5e7eb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --sidebar-width: 256px;
+}
+
+[data-theme="dark"] {
+  --color-bg: #111827;
+  --color-text: #f9fafb;
+  --color-card: #1f2937;
+  --color-border: #374151;
+  --color-sidebar: #1f2937;
+  --color-hover: #374151;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+
+/* Layout */
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--color-sidebar);
+  color: var(--color-text);
+  transition: transform 0.3s ease;
+  z-index: 20;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+/* RTL: وقتی html dir="rtl" داره */
+html[dir="rtl"] .sidebar {
+  left: auto;
+  right: 0; /* از راست شروع بشه */
+}
+
+.sidebar-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.sidebar-nav {
+  padding: 1rem;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+}
+
+.sidebar-nav a:hover {
+  background: var(--color-hover);
+}
+
+.sidebar-nav a.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+}
+
+/* RTL: margin-right به جای margin-left */
+html[dir="rtl"] .main-content {
+  margin-left: 0;
+  margin-right: var(--sidebar-width);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-card);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: white;
+  font-size: 16px;
+}
+
+.theme-toggle:hover {
+  opacity: 0.9;
+}
+
+.page-content {
+  padding: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: var(--color-text);
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.stat-card {
+  background: var(--color-card);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* User List */
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--color-card);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  html[dir="rtl"] .sidebar {
+    transform: translateX(100%); /* RTL: به راست */
+  }
+
+  html[dir="rtl"] .main-content {
+    margin-right: 0;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .header {
+    padding: 0.75rem;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-text);
+  }
+}
+
+.menu-toggle {
+  display: none;
+}
